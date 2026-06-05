@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>To-Do List Project</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #f4f4f4;
+      padding: 30px;
+    }
+    h1 {
+      color: #333;
+    }
+    #taskInput {
+      padding: 10px;
+      width: 250px;
+    }
+    button {
+      padding: 10px 15px;
+      margin: 5px;
+      cursor: pointer;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      background: white;
+      margin: 5px 0;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📋 My To-Do List</h1>
+  <input type="text" id="taskInput" placeholder="Enter task...">
+  <button id="addBtn">Add Task</button>
+  <button id="showBtn">Show Tasks</button>
+
+  <h3 id="taskCount">Total Tasks: 0</h3>
+  <ul id="taskList"></ul>
+
+  <p id="infoText"></p>
+
+  <script>
+    let tasks = []; // array to store tasks
+
+    // Function to add task
+    function addTask() {
+      let input = document.getElementById("taskInput").value;
+
+      // Condition check
+      if (input === "") {
+        document.getElementById("infoText").innerText = "⚠️ Please enter a task!";
+      } else {
+        tasks.push(input);
+        document.getElementById("infoText").innerHTML = "<b>✅ Task added successfully!</b>";
+        document.getElementById("taskInput").value = "";
+        updateCount();
+      }
+    }
+
+    // Function to show tasks
+    function showTasks() {
+      let list = document.getElementById("taskList");
+      list.innerHTML = "";
+
+      // Loop to display tasks
+      for (let i = 0; i < tasks.length; i++) {
+        let li = document.createElement("li");
+        li.textContent = (i + 1) + ". " + tasks[i]; // using textContent
+        list.appendChild(li);
+      }
+    }
+
+    // Function to update task count
+    function updateCount() {
+      document.getElementById("taskCount").innerText = "Total Tasks: " + tasks.length;
+    }
+
+    // Event Listeners
+    document.getElementById("addBtn").addEventListener("click", addTask);
+    document.getElementById("showBtn").addEventListener("click", showTasks);
+  </script>
+
+</body>
+</html>
